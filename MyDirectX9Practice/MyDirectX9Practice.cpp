@@ -2,6 +2,9 @@
 #include <windowsx.h>
 #include <d3d9.h>
 
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+
 #pragma comment (lib, "d3d9.lib")
 
 LPDIRECT3D9 d3d;
@@ -30,8 +33,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = hInstance;
-    wc.lpfnWndProc = WindowProc;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	wc.lpszClassName = L"WindowClass1";
@@ -41,11 +44,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	hWnd = CreateWindowEx(NULL,
 		L"WindowClass1",
 		L"Our First Direct3d Program",
-		WS_OVERLAPPEDWINDOW,
-		300,
-		300,
-		800,
-		600,
+		WS_EX_TOPMOST | WS_POPUP,
+		0,
+		0,
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
 		NULL,
 		NULL,
 		hInstance,
